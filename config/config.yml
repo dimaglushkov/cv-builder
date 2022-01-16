@@ -1,0 +1,10 @@
+server:
+  webserver: nginx
+  host: dimaglushkov.xyz
+  https: true
+
+
+app:
+  theme: default
+  languages:
+    - en

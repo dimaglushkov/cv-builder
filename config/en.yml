@@ -1,0 +1,12 @@
+general:
+  title: Dima Glushkov
+
+
+projects:
+  - name: Checkers online
+    url: https://github.com/dimaglushkov/checkers-online
+    description: Simple checkers desktop game
+
+  - name: Lightdm webkit 2 minimal theme
+    url: https://github.com/dimaglushkov/lightdm-webkit2-theme-minimal
+    description: Simple theme for a lightdm display manager with a webkit2 greeter
