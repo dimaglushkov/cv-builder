@@ -1,0 +1,56 @@
+
+body {
+    display: flex;
+    font-family: 'Noto Mono';
+    background: #fafafa;
+    margin: 0 0 0 0 ;
+}
+
+.sidebar-container {
+    display: flex;
+    position: absolute;
+    background: lightblue;
+    height: 100%;
+    width: 333px;
+    z-index: 1; 
+    overflow-x: hidden; 
+}
+
+.main-container {
+    margin-left: 333px;
+    padding: 20px;
+}
+
+.main-container .nav-panel {
+    padding-bottom: 20px;
+    
+}
+
+.main-container .nav-button {
+    display: inline;
+}
+
+.main-container .nav-button {
+    border: none;
+    padding: 15px 32px;
+    text-align: center;
+    font-size: 30px;
+    transition: all 0.3s;
+    background-color: #fafafa;
+    color: gray;
+}
+
+.main-container .nav-button.selected {
+    color: blue;
+}
+
+.main-container .main-content{
+    transition: all 0.3s;
+}
+
+
+.main-container .main-content.hidden{
+    display: none;
+    visibility: hidden;
+    
+}

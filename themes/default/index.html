@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+
+    <script src=" https://code.jquery.com/jquery-3.6.0.slim.min.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <title>%general.title%</title>
+
+</head>
+<body>
+
+    <div class="sidebar-container">
+        <div>hello</div>
+    </div>
+
+    <div class="main-container">
+        <div class="nav-panel">
+            <button id="projects-btn" class="nav-button selected">Projects</button>
+            <button id="cv-btn" class="nav-button">CV</button>
+
+        </div>
+
+        <div id="projects-content" class="main-content"> 
+            ;#projects
+            <div class="projects">%name%
+                <a href="%url%">link</a>
+                <div class="project-description">%description%</div>
+            </div>
+            ;#
+        </div>
+
+        <div id="cv-content" class="main-content hidden"> 
+            CV-related information
+        </div>
+
+    </div>
+    <script type="module" src="js/script.js"></script>
+
+</body>
+</html>

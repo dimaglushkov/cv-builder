@@ -3,7 +3,7 @@ import os
 import yaml
 import sys
 
-from builder import builder
+import builder
 
 
 def load_templates(config: dict) -> list:
