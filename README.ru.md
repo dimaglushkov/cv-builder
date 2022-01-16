@@ -1,7 +1,7 @@
 # Portfolio-builder
 Простой генератор статических страниц, позволяющий создать сайт-потфолио используя несколько конфигурационных файлов
 
-_Другие языки: [English](https://github.com/dimaglushkov/portfolio-builder/blob/master/README.md), [Русский](https://github.com/dimaglushkov/portfolio-builder/blob/master/README.ru.md)_
+_Другие языки: [English](https://github.com/dimaglushkov/portfolio-builder/blob/main/README.md), [Русский](https://github.com/dimaglushkov/portfolio-builder/blob/main/README.ru.md)_
 
 ## Ключевые сущности
 1. cv - детальное описание проф навыков пользователя

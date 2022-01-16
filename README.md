@@ -1,7 +1,7 @@
 # Portfolio-builder
 Simple static pages generator which provides an ability to build portfolio websites with just a few config files
 
-_Other languages: [English](https://github.com/dimaglushkov/portfolio-builder/blob/master/README.md), [Русский](https://github.com/dimaglushkov/portfolio-builder/blob/master/README.ru.md)_ 
+_Other languages: [English](https://github.com/dimaglushkov/portfolio-builder/blob/main/README.md), [Русский](https://github.com/dimaglushkov/portfolio-builder/blob/main/README.ru.md)_ 
 
 ## Key entities
 1. cv - basically cv, detailed information about person's professional skills and experience
