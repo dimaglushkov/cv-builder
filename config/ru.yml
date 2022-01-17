@@ -17,11 +17,11 @@ general:
 
 projects:
   - name: Checkers online
-    img_url: "assets/checkers-online.png"
+    img_url: ""
     code_url: https://github.com/dimaglushkov/checkers-online
-    description: Simple checkers desktop game
+    description: Шашки
 
   - name: Lightdm webkit 2 minimal theme
-    img_url: "assets/lightdm-webkit2-theme.png"
+    img_url: ""
     code_url: https://github.com/dimaglushkov/lightdm-webkit2-theme-minimal
     description: Simple theme for a lightdm display manager with a webkit2 greeter.

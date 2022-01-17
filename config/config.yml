@@ -5,6 +5,8 @@ server:
 
 
 app:
+  output: output/
   theme: default
   languages:
     - en
+    - ru
