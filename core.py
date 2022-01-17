@@ -1,6 +1,6 @@
 import re
 
-phrases_regex = re.compile("%.*%")
+phrases_regex = re.compile("%[a-zA-Z0-9_\[\]\"\-]*%")
 
 lists_regex = re.compile(";#.*;#", re.MULTILINE | re.DOTALL)
 list_target_regex = re.compile(";#([a-zA-Z0-9_]*)")
