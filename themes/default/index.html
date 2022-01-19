@@ -2,16 +2,17 @@
 <html>
 <head>
     <meta charset="UTF-8">
-
     <script src=" https://code.jquery.com/jquery-3.6.0.slim.min.js" crossorigin="anonymous"></script>
+    <link rel="icon" type="image/x-icon" href="%general.favicon%">
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <title>%general.title%</title>
-
 </head>
 <body>
 
     <div class="sidebar-container">
-        <div>hello</div>
+        <div class="image-cropper">
+            <img class="photo" src="%general.photo_url%" alt="Profile picture"></img>
+        </div>
     </div>
 
     <div class="main-container">
@@ -22,12 +23,16 @@
         </div>
 
         <div id="projects-content" class="main-content"> 
-            ;#projects
-            <div class="projects">%name%
-                <a href="%url%">link</a>
-                <div class="project-description">%description%</div>
+            <div class="projects-grid">
+                ;#projects
+                <div class="project-elem">
+                    <div class="project-name">%name%</div>
+                    <img class="project-img" src="%img_url%" alt="%name% illustration"></img>
+                    <a href="%code_url%">Source code</a>
+                    <div class="project-description">%description%</div>
+                </div>
+                ;#
             </div>
-            ;#
         </div>
 
         <div id="cv-content" class="main-content hidden"> 

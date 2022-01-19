@@ -16,9 +16,25 @@ body {
     overflow-x: hidden; 
 }
 
+.sidebar-container .image-cropper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    border-radius: 50%;
+}
+  
+.sidevar-container img {
+    display: inline;
+    margin: 0 auto;
+    height: 100%;
+    width: auto;
+}
+
 .main-container {
     margin-left: 333px;
     padding: 20px;
+    width: 100%;
 }
 
 .main-container .nav-panel {
@@ -46,11 +62,34 @@ body {
 
 .main-container .main-content{
     transition: all 0.3s;
+    padding: 0 20px 0 20px;
 }
-
 
 .main-container .main-content.hidden{
     display: none;
     visibility: hidden;
     
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-gap: 10px;
+    padding:10px;
+    background: #eee;
+}
+
+.projects-grid div {
+    text-align: center;
+    padding: 10px;
+}
+
+.project-elem .project-name {
+    font-weight: bold;
+}
+
+.project-name img{
+    max-width: 95%;
+    max-height: 95%;
+    display: block;
 }
