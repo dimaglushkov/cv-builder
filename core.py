@@ -8,7 +8,12 @@ import yaml
 
 class Builder:
     def __init__(self, config_dir="config"):
-        self.attr_regex = re.compile("%[a-zA-Z0-9_\[\]\"\-\.]*%")
+        self.attr_regex = re.compile("%[a-zA-Z0-9._]*%")
+
+        self.cond_attr_regex = re.compile("\?[^\?]*\?", re.MULTILINE | re.DOTALL)
+        self.cond_attr_target_regex = re.compile("\?([a-zA-Z0-9_\.]*)")
+        self.cond_attr_elem_regex = re.compile("\?[a-zA-Z0-9_\.]*$(.*)\?", re.MULTILINE | re.DOTALL)
+
         self.lists_regex = re.compile(";#[^;#]*;#", re.MULTILINE | re.DOTALL)
         self.list_target_regex = re.compile(";#([a-zA-Z0-9_]*)")
         self.list_elem_regex = re.compile(";#[a-zA-Z0-9_]*$(.*);#", re.MULTILINE | re.DOTALL)
@@ -56,11 +61,7 @@ class Builder:
                 with open(os.path.join(self.config["app"]["output"], prefix + name), "w") as file:
                     file.write(page_text)
 
-    def get_results(self) -> dict:
-        return self.results
-
     def __generate_file(self, text: str) -> str:
-        # TODO: implement support for sublists like ;#general.contacts
         for list_attr in re.findall(self.lists_regex, text):
             list_target = re.findall(self.list_target_regex, list_attr)[0]
             ctx = [list_target]
@@ -68,19 +69,55 @@ class Builder:
             list_elem = re.findall(self.list_elem_regex, list_attr)[0]
             list_attr_val = ""
             for i in range(list_size):
-                list_attr_val += self.__insert_attr_value(list_elem, ctx=ctx + [i])
+                list_attr_val += self.__insert_attr_val(list_elem, ctx=ctx + [i])
             text = text.replace(list_attr, list_attr_val)
-        text = self.__insert_attr_value(text)
+        text = self.__insert_attr_val(text)
         return text
 
-    def __insert_attr_value(self, text: str, ctx=None) -> str:
+    def __insert_attr_val(self, text: str, ctx=None) -> str:
         if ctx is None:
             ctx = list()
+        for conditional_attr in re.findall(self.cond_attr_regex, text):
+            target = re.findall(self.cond_attr_target_regex, conditional_attr)[0].split(".")
+            target = target if isinstance(target, list) else [target]
+
+            elem = re.findall(self.cond_attr_elem_regex, conditional_attr)[0]
+            if self.__check_conditional_attr(ctx + target):
+                elem_value = self.__insert_attr_val(elem, ctx=ctx)
+                text = text.replace(conditional_attr, elem_value)
+            else:
+                text = text.replace(conditional_attr, "")
+
         for attr in re.findall(self.attr_regex, text):
-            key = attr[1:-1].split(".")
-            key = key if isinstance(key, list) else [key]
-            text = text.replace(attr, self.__get_attr_val(ctx + key))
+            target = attr[1:-1].split(".")
+            target = target if isinstance(target, list) else [target]
+            text = text.replace(attr, self.__get_attr_val(ctx + target))
         return text
+
+    def __check_conditional_attr(self, attr_keys: list) -> bool:
+        depth = len(attr_keys)
+        val = self.data[self.cur_lang][attr_keys[0]]
+        for i in range(1, depth):
+            if isinstance(val, list) and len(val) > int(attr_keys[i]):
+                val = val[int(attr_keys[i])]
+            elif isinstance(val, dict) and attr_keys[i] in val.keys():
+                val = val[attr_keys[i]]
+            else:
+                return False
+        return True
+
+    def __get_attr_val(self, attr_keys: list) -> str:
+        depth = len(attr_keys)
+        val = self.data[self.cur_lang][attr_keys[0]]
+        for i in range(1, depth):
+            try:
+                key = int(attr_keys[i]) if isinstance(val, list) else attr_keys[i]
+                val = val[key]
+            except (NameError, KeyError, TypeError) as err:
+                attr_keys = [str(key) for key in attr_keys]
+                print(f"Exception occurred while getting {'.'.join(attr_keys)} from {self.cur_lang}.yml: {err}", file=sys.stderr)
+                exit(1)
+        return val
 
     def __load_data(self) -> dict:
         data = dict()
@@ -107,21 +144,3 @@ class Builder:
                 templates[template_name] = text
         return templates
 
-    def __get_attr_val(self, attr_keys: list) -> str:
-        if len(attr_keys) == 1:
-            if attr_keys in self.data[self.cur_lang].keys():
-                return self.data[self.cur_lang][attr_keys]
-            else:
-                print(f"Can't find attr \"{attr_keys}\" at {self.cur_lang}.yml", file=sys.stderr)
-                exit(1)
-
-        depth = len(attr_keys)
-        val = self.data[self.cur_lang][attr_keys[0]]
-        for i in range(1, depth):
-            try:
-                key = int(attr_keys[i]) if isinstance(val, list) else attr_keys[i]
-                val = val[key]
-            except (NameError, KeyError, TypeError) as err:
-                print(f"Exception occurred while getting {'.'.join(attr_keys)} from {self.cur_lang}.yml: {err}", file=sys.stderr)
-                exit(1)
-        return val
