@@ -5,13 +5,30 @@
     <script src=" https://code.jquery.com/jquery-3.6.0.slim.min.js" crossorigin="anonymous"></script>
     <link rel="icon" type="image/x-icon" href="%general.favicon%">
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" href="css/all.min.css">
     <title>%general.title%</title>
+
 </head>
 <body>
 
     <div class="sidebar-container">
-        <div class="image-cropper">
-            <img class="photo" src="%general.photo_url%" alt="Profile picture"></img>
+        <img class="photo" src="%general.photo_url%" alt="Profile picture"></img>
+        <div class="sidebar-info name">%general.name% %general.surname%</div>
+        <div class="sidebar-info bio">%general.bio%</div>
+        <div class="sidebar-info locaiton">%general.location%</div>
+        <div class="sidebar-info contacts">
+            Contact me at:
+            ;#contacts
+            <div class="contact">
+                <i class="%icon%"> </i>
+                <a href="%url%" target="_blank">
+                    </i>%url_text%
+                </a>
+            </div>
+            ;#
+        </div>
+        <div >
+
         </div>
     </div>
 
@@ -24,14 +41,16 @@
 
         <div id="projects-content" class="main-content"> 
             <div class="projects-grid">
+
                 ;#projects
                 <div class="project-elem">
                     <div class="project-name">%name%</div>
                     <img class="project-img" src="%img_url%" alt="%name% illustration"></img>
-                    <a href="%code_url%">Source code</a>
+                    <a href="%code_url%" target="_blank">Source code</a>
                     <div class="project-description">%description%</div>
                 </div>
                 ;#
+
             </div>
         </div>
 

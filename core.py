@@ -7,7 +7,7 @@ import yaml
 
 phrases_regex = re.compile("%[a-zA-Z0-9_\[\]\"\-\.]*%")
 
-lists_regex = re.compile(";#.*;#", re.MULTILINE | re.DOTALL)
+lists_regex = re.compile(";#[^;#]*;#", re.MULTILINE | re.DOTALL)
 list_target_regex = re.compile(";#([a-zA-Z0-9_]*)")
 list_elem_regex = re.compile(";#[a-zA-Z0-9_]*$(.*);#", re.MULTILINE | re.DOTALL)
 
@@ -78,6 +78,7 @@ def translate(text: str, data:dict) -> str:
 
 
 def build(text: str, data: dict, ctx: Context) -> str:
+    # TODO: implement support for sublists like ;#general.contacts
     text = translate(text, data)
     for list_ in re.findall(lists_regex, text):
         list_target = re.findall(list_target_regex, list_)[0]
