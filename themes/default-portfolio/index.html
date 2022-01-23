@@ -20,9 +20,8 @@
             Contact me at:
             ;#contacts
             <div class="contact">
-                <i class="%icon%"> </i>
                 <a href="%url%" target="_blank">
-                    </i>%url_text%
+                    <i class="%icon%"> </i> %url_text%
                 </a>
             </div>
             ;#
@@ -45,9 +44,17 @@
                 ;#projects
                 <div class="project-elem">
                     <div class="project-name">%name%</div>
-                    <img class="project-img" src="%img_url%" alt="%name% illustration"></img>
+                    <div class="project-img-container">
+                        <img class="project-img" src="%img_url%" alt="%name% illustration"></img>
+                    </div>
+                    ?code_url
                     <a href="%code_url%" target="_blank">Source code</a>
+                    ?
+                    ?demo_url
+                    | <a href="%demo_url%" target="_blank">Demo</a>
+                    ?
                     <div class="project-description">%description%</div>
+                    <div class="project-tags">%tags%</div>
                 </div>
                 ;#
 

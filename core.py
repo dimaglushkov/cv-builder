@@ -11,12 +11,12 @@ class Builder:
         self.attr_regex = re.compile("%[a-zA-Z0-9._]*%")
 
         self.cond_attr_regex = re.compile("\?[^\?]*\?", re.MULTILINE | re.DOTALL)
-        self.cond_attr_target_regex = re.compile("\?([a-zA-Z0-9_\.]*)")
-        self.cond_attr_elem_regex = re.compile("\?[a-zA-Z0-9_\.]*$(.*)\?", re.MULTILINE | re.DOTALL)
+        self.cond_attr_target_regex = re.compile("\?([a-zA-Z0-9_.]*)")
+        self.cond_attr_elem_regex = re.compile("\?[a-zA-Z0-9_.]*$(.*)\?", re.MULTILINE | re.DOTALL)
 
         self.lists_regex = re.compile(";#[^;#]*;#", re.MULTILINE | re.DOTALL)
-        self.list_target_regex = re.compile(";#([a-zA-Z0-9_]*)")
-        self.list_elem_regex = re.compile(";#[a-zA-Z0-9_]*$(.*);#", re.MULTILINE | re.DOTALL)
+        self.list_target_regex = re.compile(";#([a-zA-Z0-9_.]*)")
+        self.list_elem_regex = re.compile(";#[a-zA-Z0-9_.]*$(.*);#", re.MULTILINE | re.DOTALL)
 
         self.config_dir = config_dir
         self.config = dict()
@@ -64,12 +64,13 @@ class Builder:
     def __generate_file(self, text: str) -> str:
         for list_attr in re.findall(self.lists_regex, text):
             list_target = re.findall(self.list_target_regex, list_attr)[0]
-            ctx = [list_target]
-            list_size = len(self.data[self.cur_lang][list_target])
+            ctx = list_target.split(".") if "." in list_target else [list_target]
+            list_size = len(self.__get_attr_val(ctx))
             list_elem = re.findall(self.list_elem_regex, list_attr)[0]
             list_attr_val = ""
             for i in range(list_size):
                 list_attr_val += self.__insert_attr_val(list_elem, ctx=ctx + [i])
+
             text = text.replace(list_attr, list_attr_val)
         text = self.__insert_attr_val(text)
         return text
@@ -106,7 +107,7 @@ class Builder:
                 return False
         return True
 
-    def __get_attr_val(self, attr_keys: list) -> str:
+    def __get_attr_val(self, attr_keys: list):
         depth = len(attr_keys)
         val = self.data[self.cur_lang][attr_keys[0]]
         for i in range(1, depth):
