@@ -12,7 +12,7 @@ class Builder:
 
         self.cond_attr_regex = re.compile("\?[^\?]*\?", re.MULTILINE | re.DOTALL)
         self.cond_attr_target_regex = re.compile("\?([a-zA-Z0-9_.]*)")
-        self.cond_attr_elem_regex = re.compile("\?[a-zA-Z0-9_.]*$(.*)\?", re.MULTILINE | re.DOTALL)
+        self.cond_attr_elem_regex = re.compile("\?[a-zA-Z0-9_.]*(.*)\?", re.MULTILINE | re.DOTALL)
 
         self.lists_regex = re.compile(";#[^;#]*;#", re.MULTILINE | re.DOTALL)
         self.list_target_regex = re.compile(";#([a-zA-Z0-9_.]*)")
