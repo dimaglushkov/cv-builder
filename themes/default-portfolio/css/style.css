@@ -9,7 +9,7 @@ body {
 
 .sidebar-container {
     display: block;
-    position: absolute;
+    position: fixed; 
     background: rgb(34, 35, 38);
     height: 100%;
     width: 350px;
@@ -103,12 +103,17 @@ body {
     grid-template-columns: repeat(3,1fr);
     grid-gap: 10px;
     padding: 10px;
-    background:#d5dbe2 ;
+    /* background:#b1b6bb ; */
 }
 
 .projects-grid div {
     text-align: center;
     padding: 10px;
+    padding-bottom: 20px;
+}
+
+.project-elem {
+    background-color: #d5dbe2;
 }
 
 .project-elem .project-name {
@@ -123,7 +128,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
+    width: 95%;
     height: 17vw;
 }
 
@@ -139,4 +144,12 @@ body {
     color: rgb(65, 65, 65);
     padding-top: 0px;
     padding-bottom: 0px;
+}
+
+.cv-elem {
+    padding-bottom: 15px;
+}
+
+.cv-title {
+    font-weight: bold;
 }

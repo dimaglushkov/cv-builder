@@ -44,9 +44,11 @@
                 ;#projects
                 <div class="project-elem">
                     <div class="project-name">%name%</div>
+                    ?img_url
                     <div class="project-img-container">
                         <img class="project-img" src="%img_url%" alt="%name% illustration"></img>
                     </div>
+                    ?
                     ?code_url
                     <a href="%code_url%" target="_blank">Source code</a>
                     ?
@@ -54,7 +56,7 @@
                     | <a href="%demo_url%" target="_blank">Demo</a>
                     ?
                     <div class="project-description">%description%</div>
-                    <div class="project-tags">%tags%</div>
+                    ?tags<div class="project-tags">%tags%</div>?
                 </div>
                 ;#
 
@@ -62,7 +64,54 @@
         </div>
 
         <div id="cv-content" class="main-content hidden"> 
-            CV-related information
+            <div class="ed cv-elem">
+                <div class="cv-title">Education</div>
+                <div class="ed-list">
+                    ;#cv.education
+                    <div>
+                        %since% - %till% - %place%?note, %note%?
+                    </div>
+                    ;#
+                </div>
+            </div>
+            <div class="pub cv-elem">
+                <div class="cv-title">Publications & Conferences</div>
+                <div class="pub-list">
+                    ;#cv.pub
+                    <div class>
+                        %event% - %theme%
+                    </div>
+                    ;#
+                </div>
+            </div>
+            <div class="exp cv-elem">
+                <div class="cv-title">Working experience</div>
+                <div class="exp-list">
+                    ;#cv.exp
+                    <div>
+                        %since% - %till% - %place%, %position%
+                    </div>
+                    ;#
+                </div>
+            </div>
+            <div class="certs cv-elem">
+                <div class="cv-title">Certificates</div>
+                <div class="certs-list">
+                    ;#cv.certs
+                    <div>
+                        - <a href="%link%">%desc%</a>
+                    </div>
+                    ;#
+                </div>
+            </div>
+            <div class="skills cv-elem">
+                <div class="cv-title">Professional skills</div>
+                <div class="certs-list">
+                    ;#cv.skills
+                    <div>- %desc%</div>
+                    ;#
+                </div>
+            </div>
         </div>
 
     </div>
