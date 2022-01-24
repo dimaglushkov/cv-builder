@@ -6,7 +6,7 @@ server:
 
 app:
   output: output/
-  theme: default
+  theme: default-portfolio
   languages:
     - en
-    - ru
+    # - ru
