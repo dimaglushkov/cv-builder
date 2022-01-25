@@ -2,7 +2,7 @@ from core import Builder
 
 
 def main():
-    builder = Builder()
+    builder = Builder(config_dir="config")
     builder.build()
     builder.save()
 

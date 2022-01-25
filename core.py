@@ -1,9 +1,11 @@
+import math
 import os
 import re
 import shutil
 import sys
-
 import yaml
+
+from PIL import Image
 
 
 class Builder:
@@ -52,14 +54,33 @@ class Builder:
         for theme_dir in theme_dirs:
             shutil.copytree(os.path.join(theme_dir_path, theme_dir), os.path.join(self.config["app"]["output"], theme_dir))
         shutil.copytree("assets", os.path.join(self.config["app"]["output"], "assets"))
+        self.__minimize_assets(os.path.join(self.config["app"]["output"], "assets"))
 
         for lang, page in self.results.items():
-            prefix = f"{lang}_"
-            if lang == self.config["app"]["languages"][0]:
-                prefix = ""
+            prefix = f"{lang}."
             for name, page_text in page.items():
                 with open(os.path.join(self.config["app"]["output"], prefix + name), "w") as file:
                     file.write(page_text)
+
+    @staticmethod
+    def __minimize_assets(path):
+        size_limit = 1_048_576
+        images = [os.path.join(path, img) for img in os.listdir(path) if
+                  img.endswith("png") or
+                  img.endswith("jpg") or
+                  img.endswith("jpeg") or
+                  img.endswith(".bmp") or
+                  img.endswith("tiff")]
+        for img_path in images:
+            img_size = os.path.getsize(img_path)
+            if img_size > size_limit:
+                minimize_rate = math.sqrt(size_limit / img_size)
+                img = Image.open(img_path)
+                img_dimensions = list()
+                for i in img.size:
+                    img_dimensions.append(math.floor(i * minimize_rate))
+                img = img.resize(img_dimensions, Image.ANTIALIAS)
+                img.save(img_path, optimize=True, quality=100)
 
     def __generate_file(self, text: str) -> str:
         for list_attr in re.findall(self.lists_regex, text):
