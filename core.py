@@ -53,7 +53,7 @@ class Builder:
         theme_dirs = [d for d in os.listdir(theme_dir_path) if os.path.isdir(os.path.join(theme_dir_path, d))]
         for theme_dir in theme_dirs:
             shutil.copytree(os.path.join(theme_dir_path, theme_dir), os.path.join(self.config["app"]["output"], theme_dir))
-        shutil.copytree("assets", os.path.join(self.config["app"]["output"], "assets"))
+        shutil.copytree(os.path.join(self.config_dir, "assets"), os.path.join(self.config["app"]["output"], "assets"))
         self.__minimize_assets(os.path.join(self.config["app"]["output"], "assets"))
 
         for lang, page in self.results.items():

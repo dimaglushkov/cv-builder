@@ -1,0 +1,5 @@
+app:
+  output: output/
+  theme: default-portfolio
+  languages:
+    - en

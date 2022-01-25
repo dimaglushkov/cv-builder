@@ -1,0 +1,74 @@
+general:
+  title: Builded example
+  favicon: assets/favicon.ico
+  
+  name: Name
+  surname: Surname
+  photo_url: assets/profile-pic.png
+  bio: Some bio info
+  location: Location
+  buttons_text:
+    projects: Project
+    cv: CV
+
+contacts:
+  - icon: "fab fa-github"
+    url_text: "my github link"
+    url: ""
+  - icon: "fab fa-telegram"
+    url_text: "my telegram link"
+    url: ""
+  - icon: "fa-brands fa-linkedin"
+    url_text: "my linkedin link"
+    url: ""
+  - icon: "fa-solid fa-at"
+    url_text: my email
+    url: ""
+
+
+cv:
+  education:
+    - since: "2005"
+      till: "2014"
+      place: "School"
+    - since: "2014"
+      till: "2017"
+      place: "University"
+      note: "interesting fact about the university"
+
+  pub:
+    - event: "Some event"
+      theme: "Some publication"
+
+  exp:
+    - since: "jan 2020"
+      till: "jun 2021"
+      place: "Some company"
+      position: "some position"
+    - since: "jan 2021"
+      till: "jun 2022"
+      place: "Some company"
+      position: "some position"
+    - since: "jan 2022"
+      till: "jun 2023"
+      place: "Some company"
+      position: "some position"
+
+  certs:
+    - link: ""
+      desc: "Link to my certificates"
+
+  skills:
+    - desc: "Skiiiiilz"
+    - desc: "Mooore skillzz"
+
+projects:
+  - name: Matrix
+    img_url: assets/matrix.png
+    code_url: https://github.com/abishekvashok/cmatrix
+    demo_url: https://en.wikipedia.org/wiki/The_Matrix
+    description: Basically matrix, idk what else to say
+    tags: cool, epic, real
+
+  - name: and even more...
+    description: you could find more projects on my github page!
