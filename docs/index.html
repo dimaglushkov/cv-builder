@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <script src=" https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" href="css/all.min.css">
+    <title>Builded example</title>
+
+</head>
+<body>
+
+    <div class="sidebar-container">
+        <img class="photo" src="assets/profile-pic.png" alt="Profile picture"></img>
+        <div class="sidebar-info name">Name Surname</div>
+        <div class="sidebar-info bio">Some bio info</div>
+        <div class="sidebar-info locaiton">Location</div>
+        <div class="sidebar-info contacts">
+            Contact me at:
+            
+            <div class="contact">
+                <a href="" target="_blank">
+                    <i class="fab fa-github"> </i> my github link
+                </a>
+            </div>
+            
+            <div class="contact">
+                <a href="" target="_blank">
+                    <i class="fab fa-telegram"> </i> my telegram link
+                </a>
+            </div>
+            
+            <div class="contact">
+                <a href="" target="_blank">
+                    <i class="fa-brands fa-linkedin"> </i> my linkedin link
+                </a>
+            </div>
+            
+            <div class="contact">
+                <a href="" target="_blank">
+                    <i class="fa-solid fa-at"> </i> my email
+                </a>
+            </div>
+            
+        </div>
+        <div class="sidebar-languages">
+                <a href="/en">English</a>
+                <a href="/ru">Русский</a>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <div class="nav-panel">
+            <button id="projects-btn" class="nav-button selected">Project</button>
+            <button id="cv-btn" class="nav-button">CV</button>
+
+        </div>
+
+        <div id="projects-content" class="main-content"> 
+            <div class="projects-grid">
+
+                
+                <div class="project-elem">
+                    <div class="project-name">Matrix</div>
+                    
+                    <div class="project-img-container">
+                        <img class="project-img" src="assets/matrix.png" alt="Matrix illustration"></img>
+                    </div>
+                    
+                    
+                    <a href="https://github.com/abishekvashok/cmatrix" target="_blank" class="project-code-url">Source code</a>
+                    
+                    
+                    | <a href="https://en.wikipedia.org/wiki/The_Matrix" target="_blank">Demo</a>
+                    
+                    <div class="project-description">Basically matrix, idk what else to say</div>
+                    <div class="project-tags">cool, epic, real</div>
+                </div>
+                
+                <div class="project-elem">
+                    <div class="project-name">and even more...</div>
+                    
+                    
+                    
+                    <div class="project-description">you could find more projects on my github page!</div>
+                    
+                </div>
+                
+
+            </div>
+        </div>
+
+        <div id="cv-content" class="main-content hidden"> 
+            <div class="ed cv-elem">
+                <div class="cv-title">Education</div>
+                <div class="ed-list">
+                    
+                    <div>
+                        2005 - 2014 - School
+                    </div>
+                    
+                    <div>
+                        2014 - 2017 - University, interesting fact about the university
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="pub cv-elem">
+                <div class="cv-title">Publications & Conferences</div>
+                <div class="pub-list">
+                    
+                    <div class>
+                        Some event - Some publication
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="exp cv-elem">
+                <div class="cv-title">Working experience</div>
+                <div class="exp-list">
+                    
+                    <div>
+                        jan 2020 - jun 2021 - Some company, some position
+                    </div>
+                    
+                    <div>
+                        jan 2021 - jun 2022 - Some company, some position
+                    </div>
+                    
+                    <div>
+                        jan 2022 - jun 2023 - Some company, some position
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="certs cv-elem">
+                <div class="cv-title">Certificates</div>
+                <div class="certs-list">
+                    
+                    <div>
+                        - <a href="">Link to my certificates</a>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="skills cv-elem">
+                <div class="cv-title">Professional skills</div>
+                <div class="certs-list">
+                    
+                    <div>- Skiiiiilz</div>
+                    
+                    <div>- Mooore skillzz</div>
+                    
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script type="module" src="js/script.js"></script>
+
+</body>
+</html>
