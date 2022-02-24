@@ -1,68 +1,83 @@
-# Portfolio-builder
-_Потому что лень изменять HTML-код_
+# html-builder
+Static HTML pages generator
 
-Простой генератор статических страниц, позволяющий создать сайт-потфолио используя несколько конфигурационных файлов
+_Other languages: [English](https://github.com/dimaglushkov/portfolio-builder/blob/main/README.md), [Русский](https://github.com/dimaglushkov/portfolio-builder/blob/main/README.ru.md)_ 
 
-# Ключевые принципы работы
-Существует несколько сущеостей, необходмых для корректной работы генератора:
-1. Конфигурация - `/config/config.yml` - общий файл конфигурации билдера, а также другие файлы `(/config/*.yml)` содержащие значения аттрибутов, которые будут использоваться при генерации страниц (подробнее об аттрибутах ниже).
-2. Тема - набор JS, CSS файлов и HTML-шаблон с переменными, представленными в специальном формате 
-3. Ассеты - любые статические файлы, не зависящие от темы (например, свой favicon.ico или фотография профиля).
+# The way it works
+There are three entities you need to configure once before running:
+1. Configuration - `/config/config.yml` - general configuration file, `(/config/*.yml)` - files with attribute values, which will be used for page generation.
+2. Theme - JS, CSS, and HTML-template with special variables (more details on variables below) 
+3. Assets - basically any media file such as images or icons
  
-## Переменные, аттрибуты, HTML-шаблоны
-Перечисленные выше сущности связываются через общие аттрибуты.
-- Для конифгурации аттрибут - какое-либо значение в YAML-файле.
-Пример аттрибута в файле конфигурации:
+## Variables and attributes
+Variables mentioned above are connected through the attributes.
+- In terms of configuration: attribute is a value in config YAML file. For example:
 ```yaml
 general:
   name:
-    Дима
+    Dima
 ```
-- Для HTML-шаблонов аттрибут вписывается прямо в HTML-код на месте, на котором в результате должно оказаться значение из конфигурации. Пример аттрибута в HTML-шаблоне:
+- In terms of HTML-templates: attribute is a specially formatted code right inside html, which will be replaced with the value from configuration by generator. For example:
 ```html
 <head>
     <title>%general.name%</title>
 </head>
 ```
 
-### Подробнее про аттрибуты
-В данный момент поддерживается логика для трёх видов аттрибутов:
-1. Простой аттрибут. В HTML-шаблона обозначается как `%general.name%`. Для данных аттрибутов генератор просто подставляет значение из конфигурации.
-2. Списковый аттрибут. Вид в HTML шаблоне:
-```html
-;#some_list
-<div class="some_list_class">
-    <a href="%url%">%name%</a>
-</div>
-;#
-```
-Вид в YAML-файле:
-```yaml
-some_list:
-  -
-    url: https://example.com/1
-    name: example 1
-  -  
-    url: https://example.com/2
-    name: example 2
-```
-Генератор продублирует код, который находится внутри конструкции `;#attr_name ... ;#` необходимое количество раз и установит в данные фрагменты кода соответствующие значения из конфигурации
-3. Условный аттрибут. В HTML-шаблоне имеет следующий вид:
-```html
-?some_list
-<div class="some_list_class">
-    <a href="%url%">%name%</a>
-</div>
-?
-```
-В YAML-файле записывается так же, как простой аттрибут. Ключевое отличие условного аттрибута от простого аттрибута в том, что он при указании его в HTML-шаблоне он не является обязательным в конфигурации. При его отсутствии кусок кода внутри условного аттрибута просто будет удалён. **Может использоваться внутри спискового аттрибута**
+By now generator supports 3 types of attributes:
+1. Simple attribute. Represented in HTML code as yaml variable wrapped in `%` (snippet above is the example of simple attribute). For this type of attribute generator basically replace the attribute with the value from config.
+2. List-typed attribute. <br>
+   - HTML representation example:
+       ```html
+       ;#some_list
+       <div class="some_list_class">
+           <a href="%url%">%name%</a>
+       </div>
+       ;#
+       ```
+   - Yaml representation example:
+       ```yaml
+       some_list:
+         -
+           url: https://example.com/1
+           name: example 1
+         -  
+           url: https://example.com/2
+           name: example 2
+       ```
+   For every element of the list variable (which name stated after first `;#`) in YAML file, generator will create entry from html code replacing variables with actual values. 
+   - Result example:
+    ```html
+    <div class="some_list_class">
+        <a href="https://example.com/1">example 1</a>
+    </div>
+    <div class="some_list_class">
+        <a href="https://example.com/2">example 2</a>
+    </div>
+    ```
+3. Conditional attribute.
+   - HTML representation example: <br>
+    ```html
+    ?url
+    <div class="some_variable">
+        <a href="%url%">%name%</a>
+    </div>
+    ?
+   
+    ...
+   
+    <img src="example.com" ?alt_text alt="%alt_text%"?></img>
+    ```
+    YAML config representation of conditional attribute is identical to the simple one. Key difference is that conditional attributes can be omitted - in this case generator will just ignore it.<br>
+    Usually it makes most sense to use conditional attributes inside the list-typed attributes.
 
-##Ключевая особенность
-Любой желающий может создать свою собственную тему, со своим собственным дизайном и набором аттрибутов. Сами аттрибуты зависят ТОЛЬКО от используемой темы и в случае разработки собственной темы можно использоваться любые наборы аттрибутов.
+## Attributes independence
+Set of used attributes is defined only by used theme and limited only by your imagination. Feel free to edit existing theme or even crete your own
 
+### Features of the default theme
+- Automatically gets info about stargazers of github repos
+- Multilanguage support
 
-## Другие классные возможности
-1. Поддержка нескольких языков
-2. Подтягивание количество звёзд и форков с гитхаба (_в процессе реализаци_)
-3. Генерация статического pdf файла с ключевой информацией (_в процессе реализаци_)
-4. Генерация конфига nginx для простого развёртывания на сервере (_в процессе реализаци_)
+### Future features of the default theme
+- Generating PDF with key info from the same config files
+- Target environment differentiation (github pages or nginx server), for nginx cases also creating config file
