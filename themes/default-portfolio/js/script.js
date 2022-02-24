@@ -1,21 +1,17 @@
-$('button#projects-btn').click(function(){
-    document.getElementById("cv-btn").classList.remove("selected")
+$('button.nav-button').click(function(){
+    $(".nav-button").each(function(i ,obj) {
+        obj.classList.remove("selected")
+    })
     this.classList.add("selected")
 
-    document.getElementById("cv-content").classList.add("hidden")
-    document.getElementById("projects-content").classList.remove("hidden")
-});
-
-$('button#cv-btn').click(function(){
-    document.getElementById("projects-btn").classList.remove("selected")
-    this.classList.add("selected")
-
-    document.getElementById("projects-content").classList.add("hidden")
-    document.getElementById("cv-content").classList.remove("hidden")
+    $(".main-content").each(function(i ,obj) {
+        obj.classList.add("hidden")
+    })
+    document.getElementById(this.id + "-content").classList.remove("hidden")
 });
 
 $(document).ready(function () {
-    $(".project-code-url").each(function() {
+    $(".github-repo").each(function() {
         let a = $(this)
         let url = $(this).attr("href")
         if (!url.includes("github.com/"))

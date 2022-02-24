@@ -48,7 +48,16 @@ body {
     text-decoration: none;
 }
 
+.sidebar-container .sidebar-languages {
+    position: fixed;
+    margin: 20px;
+    bottom: 5px;
+}
 
+.sidebar-container .sidebar-languages a {
+    text-decoration: none;
+    color: gray;
+}
 
 .main-container {
     margin-left: 350px;
@@ -57,8 +66,7 @@ body {
 }
 
 .main-container .nav-panel {
-    padding-bottom: 20px;
-    padding: 0 20px 20px 20px;
+    padding: 0 20px 20px;
 }
 
 .main-container .nav-button {
@@ -68,7 +76,7 @@ body {
     text-align: center;
     font-size: 30px;
     transition: all 0.3s;
-    background-color: #fafafa;
+    background-color: #FCF7FF;
     color: rgb(138, 138, 138);
 }
 
@@ -88,7 +96,7 @@ body {
 }
 
 .main-container .main-content{
-    transition: all 0.3s;
+    transition:visibility 0.3s linear,opacity 0.3s linear;
     padding: 0 20px 0 20px;
 }
 
@@ -102,14 +110,12 @@ body {
     display: grid;
     grid-template-columns: repeat(3,1fr);
     grid-gap: 10px;
-    padding: 10px;
     /* background:#b1b6bb ; */
 }
 
 .projects-grid div {
     text-align: center;
-    padding: 10px;
-    padding-bottom: 20px;
+    padding: 10px 10px 20px;
 }
 
 .project-elem {

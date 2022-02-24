@@ -26,19 +26,20 @@
             </div>
             ;#
         </div>
-        <div >
-
+        <div class="sidebar-languages">
+                <a href="/en">English</a>
+                <a href="/ru">Русский</a>
         </div>
     </div>
 
     <div class="main-container">
         <div class="nav-panel">
-            <button id="projects-btn" class="nav-button selected">Projects</button>
-            <button id="cv-btn" class="nav-button">CV</button>
-
+            <button id="projects-btn" class="nav-button selected">%general.buttons_text.projects%</button>
+            <button id="contributes-btn" class="nav-button">%general.buttons_text.contributed%</button>
+            <button id="cv-btn" class="nav-button">%general.buttons_text.cv%</button>
         </div>
 
-        <div id="projects-content" class="main-content"> 
+        <div id="projects-btn-content" class="main-content">
             <div class="projects-grid">
 
                 ;#projects
@@ -50,7 +51,7 @@
                     </div>
                     ?
                     ?code_url
-                    <a href="%code_url%" target="_blank" class="project-code-url">Source code</a>
+                    <a href="%code_url%" target="_blank" class="project-code-url github-repo">Source code</a>
                     ?
                     ?demo_url
                     | <a href="%demo_url%" target="_blank">Demo</a>
@@ -63,7 +64,32 @@
             </div>
         </div>
 
-        <div id="cv-content" class="main-content hidden"> 
+        <div id="contributes-btn-content" class="main-content hidden">
+            <div class="projects-grid">
+
+                ;#contributes
+                <div class="project-elem">
+                    <div class="project-name">%name%</div>
+                    ?img_url
+                    <div class="project-img-container">
+                        <img class="project-img" src="%img_url%" alt="%name% illustration"></img>
+                    </div>
+                    ?
+                    ?code_url
+                    <a href="%code_url%" target="_blank" class="project-code-url github-repo">Source code</a>
+                    ?
+                    ?demo_url
+                    | <a href="%demo_url%" target="_blank">Demo</a>
+                    ?
+                    <div class="project-description">%description%</div>
+                    ?tags<div class="project-tags">%tags%</div>?
+                </div>
+                ;#
+
+            </div>
+        </div>
+
+        <div id="cv-btn-content" class="main-content hidden">
             <div class="ed cv-elem">
                 <div class="cv-title">Education</div>
                 <div class="ed-list">

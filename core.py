@@ -51,8 +51,8 @@ class Builder:
         theme_dir_path = os.path.join("themes", self.config["app"]["theme"])
         os.mkdir(self.config["app"]["output"])
         theme_dirs = [d for d in os.listdir(theme_dir_path) if os.path.isdir(os.path.join(theme_dir_path, d))]
-        for theme_dir in theme_dirs:
-            shutil.copytree(os.path.join(theme_dir_path, theme_dir), os.path.join(self.config["app"]["output"], theme_dir))
+        for theme_d in theme_dirs:
+            shutil.copytree(os.path.join(theme_dir_path, theme_d), os.path.join(self.config["app"]["output"], theme_d))
         shutil.copytree(os.path.join(self.config_dir, "assets"), os.path.join(self.config["app"]["output"], "assets"))
         self.__minimize_assets(os.path.join(self.config["app"]["output"], "assets"))
 
@@ -69,16 +69,14 @@ class Builder:
                   img.endswith("png") or
                   img.endswith("jpg") or
                   img.endswith("jpeg") or
-                  img.endswith(".bmp") or
+                  img.endswith("bmp") or
                   img.endswith("tiff")]
         for img_path in images:
             img_size = os.path.getsize(img_path)
             if img_size > size_limit:
                 minimize_rate = math.sqrt(size_limit / img_size)
                 img = Image.open(img_path)
-                img_dimensions = list()
-                for i in img.size:
-                    img_dimensions.append(math.floor(i * minimize_rate))
+                img_dimensions = (math.floor(img.size[0] * minimize_rate), math.floor(img.size[1] * minimize_rate))
                 img = img.resize(img_dimensions, Image.ANTIALIAS)
                 img.save(img_path, optimize=True, quality=100)
 
@@ -137,7 +135,8 @@ class Builder:
                 val = val[key]
             except (NameError, KeyError, TypeError) as err:
                 attr_keys = [str(key) for key in attr_keys]
-                print(f"Exception occurred while getting {'.'.join(attr_keys)} from {self.cur_lang}.yml: {err}", file=sys.stderr)
+                print(f"Exception occurred while getting {'.'.join(attr_keys)} from {self.cur_lang}.yml: {err}",
+                      file=sys.stderr)
                 exit(1)
         return val
 
@@ -165,4 +164,3 @@ class Builder:
                 text = template_file.read()
                 templates[template_name] = text
         return templates
-
